@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CockyLab</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #283a42;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .image-grid {
+            position: absolute;
+            top: 0;
+            left: 33.33%; /* Comienza desde la segunda columna */
+            width: 66.67%; /* Ocupa las dos últimas columnas */
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 383px;
+            gap: 48px; /* Espaciado entre imágenes */
+            opacity: 0.5;
+        }
+        .image-grid img {
+            width: 261px;
+            height: 383px;
+            object-fit: cover;
+            border-radius: 40px;
+        }
+        /* Ajuste de desplazamiento de columnas */
+        .image-grid img:nth-child(3n + 1) { /* Primera columna */
+            transform: translateY(-192px);
+        }
+ .image-grid img:nth-child(3n + 2) { /* Primera columna */
+            transform: translateY(-0px);
+        }
+        .image-grid img:nth-child(3n + 3) { /* Tercera columna */
+            transform: translateY(-192px);
+        }
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 233, 208, 0.4) 20%, rgba(51, 65, 72, 0.8) 80%);
+            backdrop-filter: blur(5px);
+            opacity: 0.5;
+        }
+        .text {
+            position: absolute;
+            left: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: "Helvetica Neue Condensed Black", sans-serif;
+            font-weight: 900;
+            font-size: 128px;
+            line-height: 70px;
+            color: #F1EDE1;
+            letter-spacing: -4.48px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-grid">
+            <img src="Imagenes/pexels-cottonbro-5928593.jpg" alt="1,1"> 
+            <img src="Imagenes/pexels-ejov-igor-1726422-12490467.jpg" alt="2,1">
+            <img src="Imagenes/pexels-cottonbro-5928593.jpg" alt="1,2">
+            <img src="Imagenes/pexels-photo-6621886.jpg" alt="1,2">
+            <img src="Imagenes/pexels-photo-5496590.jpg" alt="2,2">
+            <img src="Imagenes/pexels-photo-6621639.jpg" alt="3,2">
+            <img src="Imagenes/pexels-photo-4833669.jpg" alt="1,3">
+            <img src="Imagenes/pexels-cottonbro-5928593.jpg" alt="2,3">
+            <img src="Imagenes/pexels-cottonbro-5928593.jpg" alt="3,3">
+        </div>
+        <div class="background-overlay"></div>
+        <div class="text">
+            <div>boost</div>
+            <div>your confidence</div>
+        </div>
+    </div>
+</body>
+</html>
