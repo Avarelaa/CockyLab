@@ -37,6 +37,7 @@
             height: 383px;
             object-fit: cover;
             border-radius: 40px;
+            display: block; /* Evita espacios adicionales */
         }
         /* Ajuste de desplazamiento de columnas en desktop */
         .image-grid img:nth-child(3n + 1) {
@@ -72,23 +73,29 @@
         /* Responsive: Ajustes para mobile */
         @media (max-width: 768px) {
             .image-grid {
-                left: 5%; /* Margen a los lados */
-                width: 90%; /* Que no ocupe todo el ancho */
+                left: 8%; /* Margen a los lados */
+                width: 85%; /* Que no ocupe todo el ancho */
                 grid-template-columns: 1fr; /* Solo una columna */
-                gap: 24px; /* Reducir el espaciado en mobile */
+                gap: 0; /* Elimina cualquier espacio entre imágenes */
             }
             .image-grid img {
                 width: 100%; /* Que ocupen todo el ancho disponible */
                 height: auto; /* Altura automática para mantener proporción */
+                margin: 0; /* Asegura que no haya márgenes */
+                padding: 0; /* Elimina padding adicional */
+                display: block; /* Evita espacios adicionales */
             }
             .text {
-                font-size: min(14vw, 50px); /* Ajuste dinámico para que no se corte */
+                font-size: min(14vw, 40px); /* Ajuste dinámico para que no se corte */
                 line-height: 0.6;
                 text-align: left;
-                left: 10%;
-                transform: translateY(-50%);
+                left: 16%;
+                transform: translateY(-20%);
                 white-space: nowrap; /* Evita el salto de línea en mobile también */
             }
+.image-grid img:nth-child(3n + 1) {
+            transform: translateY(-140px);
+        }
         }
     </style>
 </head>
