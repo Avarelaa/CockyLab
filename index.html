@@ -66,26 +66,28 @@
             line-height: 70px;
             color: #F1EDE1;
             letter-spacing: -4.48px;
+            white-space: nowrap; /* Evita el salto de línea */
         }
         
         /* Responsive: Ajustes para mobile */
         @media (max-width: 768px) {
             .image-grid {
-                left: 0;
-                width: 100%;
+                left: 5%; /* Margen a los lados */
+                width: 90%; /* Que no ocupe todo el ancho */
                 grid-template-columns: 1fr; /* Solo una columna */
                 gap: 24px; /* Reducir el espaciado en mobile */
             }
             .image-grid img {
-                width: 100%; /* Que ocupen todo el ancho */
+                width: 100%; /* Que ocupen todo el ancho disponible */
                 height: auto; /* Altura automática para mantener proporción */
             }
             .text {
-                font-size: 64px;
-                line-height: 50px;
-                text-align: center;
-                left: 50%;
-                transform: translate(-50%, -50%);
+                font-size: min(14vw, 64px); /* Ajuste dinámico para que no se corte */
+                line-height: 1.2;
+                text-align: left;
+                left: 10%;
+                transform: translateY(-50%);
+                white-space: nowrap; /* Evita el salto de línea en mobile también */
             }
         }
     </style>
