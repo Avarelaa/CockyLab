@@ -5,47 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CockyLab</title>
     <style>
-        body {
+        /* Resetting margin and padding */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: #283a42;
             overflow: hidden;
-        }
-        .container {
             position: relative;
-            width: 100%;
-            height: 100%;
         }
-        .image-grid {
-            position: absolute;
-            top: 0;
-            left: 33.33%; /* Comienza desde la segunda columna en desktop */
-            width: 66.67%; /* Ocupa las dos últimas columnas */
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 383px;
-            gap: 48px; /* Espaciado entre imágenes */
-            opacity: 0.5;
-        }
-        .image-grid img {
-            width: 261px;
-            height: 383px;
-            object-fit: cover;
-            border-radius: 40px;
-            display: block; /* Evita espacios adicionales */
-        }
-        /* Ajuste de desplazamiento de columnas en desktop */
-        .image-grid img:nth-child(3n + 1) {
-            transform: translateY(-192px);
-        }
-        .image-grid img:nth-child(3n + 3) {
-            transform: translateY(192px);
-        }
+
+        /* Background overlay with blur effect */
         .background-overlay {
             position: absolute;
             top: 0;
@@ -53,9 +31,49 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(circle, rgba(255, 233, 208, 0.4) 20%, rgba(51, 65, 72, 0.8) 80%);
-            backdrop-filter: blur(5px);
+        }
+
+        /* Container for content */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Image grid styling */
+        .image-grid {
+            position: absolute;
+            top: 0;
+            left: 33.33%;
+            width: 66.67%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 383px;
+            gap: 48px;
             opacity: 0.5;
         }
+
+        .image-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 40px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Adjust positioning of images */
+        .image-grid img:nth-child(3n + 1) {
+            transform: translateY(-100px);
+        }
+
+        .image-grid img:nth-child(3n + 3) {
+            transform: translateY(100px);
+        }
+
+        /* Text styling */
         .text {
             position: absolute;
             left: 10%;
@@ -67,42 +85,47 @@
             line-height: 70px;
             color: #F1EDE1;
             letter-spacing: -4.48px;
-            white-space: nowrap; /* Evita el salto de línea */
+            white-space: nowrap;
         }
-        
-        /* Responsive: Ajustes para mobile */
+
+        /* Mobile version with horizontal slider */
         @media (max-width: 768px) {
             .image-grid {
-                left: 8%; /* Margen a los lados */
-                width: 85%; /* Que no ocupe todo el ancho */
-                grid-template-columns: 1fr; /* Solo una columna */
-                gap: 0; /* Elimina cualquier espacio entre imágenes */
+                position: relative;
+                left: 0;
+                width: 100%;
+                grid-template-columns: none; /* Remove grid */
+                display: flex; /* Change to flexbox for horizontal scroll */
+                gap: 16px; /* Smaller gap for mobile */
+                overflow-x: auto; /* Enable horizontal scroll */
+                scroll-snap-type: x mandatory; /* Enable snapping */
+                
             }
+
             .image-grid img {
-                width: 100%; /* Que ocupen todo el ancho disponible */
-                height: auto; /* Altura automática para mantener proporción */
-                margin: 0; /* Asegura que no haya márgenes */
-                padding: 0; /* Elimina padding adicional */
-                display: block; /* Evita espacios adicionales */
+                flex-shrink: 0; /* Prevent images from shrinking */
+                width: 100%; /* Ensure images fill the container */
+                height: auto; /* Keep aspect ratio */
+                scroll-snap-align: start; /* Align images to the left when scrolling */
+                border-radius: 20px; /* Optional: round the corners slightly */
             }
+
             .text {
-                font-size: min(14vw, 40px); /* Ajuste dinámico para que no se corte */
-                line-height: 0.6;
+                font-size: min(14vw, 50px);
+                line-height: 1.2;
                 text-align: left;
-                left: 16%;
-                transform: translateY(-20%);
-                white-space: nowrap; /* Evita el salto de línea en mobile también */
+                left: 10%;
+                transform: translateY(-50%);
             }
-.image-grid img:nth-child(3n + 1) {
-            transform: translateY(-140px);
-        }
         }
     </style>
 </head>
 <body>
+    <div class="background-overlay"></div>
+    <div class="full-screen-white-background"></div>
     <div class="container">
         <div class="image-grid">
-            <img src="https://avarelaa.github.io/CockyLab/pexels-photo-6621639.jpg" alt="1,1"> 
+            <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,1">
             <img src="https://avarelaa.github.io/CockyLab/pexels-ejov-igor-1726422-12490467.jpg" alt="2,1">
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,2">
             <img src="https://avarelaa.github.io/CockyLab/pexels-photo-6621886.jpg" alt="1,2">
@@ -112,7 +135,6 @@
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="2,3">
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="3,3">
         </div>
-        <div class="background-overlay"></div>
         <div class="text">
             <div>boost</div>
             <div>your confidence</div>
@@ -120,3 +142,4 @@
     </div>
 </body>
 </html>
+
