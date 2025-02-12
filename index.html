@@ -44,12 +44,68 @@
         }
 
         /* Image grid styling for desktop */
+       /* .image-grid-desktop {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+           /* grid-auto-rows: 383px;
+            gap: 48px;
+            width: 100%;
+            height: 100%;
+        }*/
+
         .image-grid-desktop img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 20px;
+
         }
+
+
+/* Control the starting column for each image */
+.image-grid-desktop img:nth-child(1) {
+    grid-column-start: 2; /* Start in the first column */
+    transform: translateY(-20%); 
+    
+}
+
+.image-grid-desktop img:nth-child(2) {
+    grid-column-start: 3; /* Start in the second column */
+  
+}
+
+.image-grid-desktop img:nth-child(3) {
+    grid-column-start: 4; /* Start in the third column */
+    transform: translateY(-20%); 
+}
+
+/* Example of controlling the start column for other images */
+.image-grid-desktop img:nth-child(4) {
+    grid-column-start: 2; /* Start in the first column */
+    transform: translateY(-20%); 
+}
+
+.image-grid-desktop img:nth-child(5) {
+    grid-column-start: 3; /* Start in the second column */
+}
+
+.image-grid-desktop img:nth-child(6) {
+   grid-column-start: 4; /* Start in the third column */
+   transform: translateY(-20%); 
+}
+
+.image-grid-desktop img:nth-child(7) {
+   grid-column-start: 2; /* Start in the third column */
+   transform: translateY(-20%); 
+}
+.image-grid-desktop img:nth-child(8) {
+   grid-column-start: 3; /* Start in the third column */
+}
+.image-grid-desktop img:nth-child(9) {
+   grid-column-start: 4; /* Start in the third column */
+   transform: translateY(-20%); 
+}
+        
 
         /* Image grid styling for mobile */
         .image-grid-mobile {
@@ -127,7 +183,7 @@
     <div class="background-overlay"></div>
     <div class="full-screen-white-background"></div>
     <div class="container">
-        <div class="image-grid-desktop" id="imageGrid">
+        <div class="image-grid-desktop">
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,1">
             <img src="https://avarelaa.github.io/CockyLab/pexels-ejov-igor-1726422-12490467.jpg" alt="2,1">
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,2">
@@ -138,7 +194,7 @@
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="2,3">
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="3,3">
         </div>
-        <div class="image-grid-mobile" id="imageGridMobile">
+        <div class="image-grid-mobile" id="imageGrid">
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,1">
             <img src="https://avarelaa.github.io/CockyLab/pexels-ejov-igor-1726422-12490467.jpg" alt="2,1">
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,2">
@@ -158,33 +214,28 @@
     <script>
         // Check if the window width is less than or equal to 768px (Mobile view)
         if (window.innerWidth <= 768) {
-            const imageGrid = document.getElementById('imageGridMobile');
+            // Get the image grid element
+            const imageGrid = document.getElementById('imageGrid');
+            
+            // Set up the scroll speed and interval for slower scrolling
             const scrollSpeed = 30; // Slower scroll speed (lower value = slower movement)
-            const scrollInterval = 300; // Slower interval (increase the time for smoother movement)
+            const scrollInterval = 200; // Slower interval (increase the time for smoother movement)
 
-            function autoScroll(time) {
-                // Calculate the time elapsed since the last frame
-                const deltaTime = time - lastTime;
-                lastTime = time;
-
+            function autoScroll() {
                 imageGrid.scrollBy({
-                    left: scrollSpeed * deltaTime, // Adjust speed based on elapsed time
-                    behavior: 'smooth'
+                    left: scrollSpeed, // Scroll horizontally to the right
+                    behavior: "smooth" // Smooth scroll
                 });
 
                 // Check if we've reached the end of the scroll
                 if (imageGrid.scrollLeft + imageGrid.clientWidth >= imageGrid.scrollWidth) {
                     imageGrid.scrollLeft = 0; // Reset to start when reaching the end
                 }
-
-                // Request the next animation frame
-                requestAnimationFrame(autoScroll);
             }
 
-            // Start the auto-scroll animation
-            requestAnimationFrame(autoScroll);
+            // Start automatic scrolling with the adjusted speed
+            setInterval(autoScroll, scrollInterval);
         }
     </script>
 </body>
 </html>
-
