@@ -31,6 +31,7 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(circle, rgba(255, 233, 208, 0.4) 20%, rgba(51, 65, 72, 0.8) 80%);
+            z-index: 1; /* Asegura que quede debajo del texto */
         }
 
         /* Container for content */
@@ -42,35 +43,87 @@
             margin: 0 auto;
         }
 
-        /* Image grid styling */
-        .image-grid {
-            position: absolute;
-            top: 0;
-            left: 33.33%;
-            width: 66.67%;
-            height: 100%;
+        /* Image grid styling for desktop */
+       /* .image-grid-desktop {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 383px;
+            grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+           /* grid-auto-rows: 383px;
             gap: 48px;
-            opacity: 0.5;
-        }
+            width: 100%;
+            height: 100%;
+        }*/
 
-        .image-grid img {
+        .image-grid-desktop img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 40px;
-            transition: transform 0.3s ease-in-out;
+            border-radius: 20px;
+
         }
 
-        /* Adjust positioning of images */
-        .image-grid img:nth-child(3n + 1) {
-            transform: translateY(-100px);
+
+/* Control the starting column for each image */
+.image-grid-desktop img:nth-child(1) {
+    grid-column-start: 2; /* Start in the first column */
+    transform: translateY(-20%); 
+    
+}
+
+.image-grid-desktop img:nth-child(2) {
+    grid-column-start: 3; /* Start in the second column */
+  
+}
+
+.image-grid-desktop img:nth-child(3) {
+    grid-column-start: 4; /* Start in the third column */
+    transform: translateY(-20%); 
+}
+
+/* Example of controlling the start column for other images */
+.image-grid-desktop img:nth-child(4) {
+    grid-column-start: 2; /* Start in the first column */
+    transform: translateY(-20%); 
+}
+
+.image-grid-desktop img:nth-child(5) {
+    grid-column-start: 3; /* Start in the second column */
+}
+
+.image-grid-desktop img:nth-child(6) {
+   grid-column-start: 4; /* Start in the third column */
+   transform: translateY(-20%); 
+}
+
+.image-grid-desktop img:nth-child(7) {
+   grid-column-start: 2; /* Start in the third column */
+   transform: translateY(-20%); 
+}
+.image-grid-desktop img:nth-child(8) {
+   grid-column-start: 3; /* Start in the third column */
+}
+.image-grid-desktop img:nth-child(9) {
+   grid-column-start: 4; /* Start in the third column */
+   transform: translateY(-20%); 
+}
+        
+
+        /* Image grid styling for mobile */
+        .image-grid-mobile {
+            display: flex; /* Use flex for horizontal scroll */
+            gap: 16px;
+            overflow-x: auto; /* Enable horizontal scroll */
+            scroll-snap-type: x mandatory; /* Enable snapping */
+            width: 100%;
+            height: 100%;
         }
 
-        .image-grid img:nth-child(3n + 3) {
-            transform: translateY(100px);
+        .image-grid-mobile img {
+            flex-shrink: 0; /* Prevent images from shrinking */
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 20px;
+            scroll-snap-align: start; /* Align images to the left when scrolling */
         }
 
         /* Text styling */
@@ -86,36 +139,42 @@
             color: #F1EDE1;
             letter-spacing: -4.48px;
             white-space: nowrap;
+            z-index: 2; /* Asegura que el texto esté por encima del overlay */
         }
 
         /* Mobile version with horizontal slider */
         @media (max-width: 768px) {
-            .image-grid {
-                position: relative;
-                left: 0;
-                width: 100%;
-                grid-template-columns: none; /* Remove grid */
-                display: flex; /* Change to flexbox for horizontal scroll */
+            .image-grid-desktop {
+                display: none; /* Hide desktop grid */
+            }
+
+            .image-grid-mobile {
+                display: flex; /* Show the mobile slider */
                 gap: 16px; /* Smaller gap for mobile */
                 overflow-x: auto; /* Enable horizontal scroll */
                 scroll-snap-type: x mandatory; /* Enable snapping */
-                
-            }
-
-            .image-grid img {
-                flex-shrink: 0; /* Prevent images from shrinking */
-                width: 100%; /* Ensure images fill the container */
-                height: auto; /* Keep aspect ratio */
-                scroll-snap-align: start; /* Align images to the left when scrolling */
-                border-radius: 20px; /* Optional: round the corners slightly */
             }
 
             .text {
                 font-size: min(14vw, 50px);
-                line-height: 1.2;
+                line-height: 0.6;
                 text-align: left;
                 left: 10%;
                 transform: translateY(-50%);
+            }
+        }
+
+        /* Desktop version with static grid */
+        @media (min-width: 769px) {
+            .image-grid-mobile {
+                display: none; /* Hide mobile slider */
+            }
+
+            .image-grid-desktop {
+                display: grid; /* Show desktop grid */
+                grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+                grid-auto-rows: 383px;
+                gap: 48px;
             }
         }
     </style>
@@ -124,7 +183,18 @@
     <div class="background-overlay"></div>
     <div class="full-screen-white-background"></div>
     <div class="container">
-        <div class="image-grid">
+        <div class="image-grid-desktop">
+            <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,1">
+            <img src="https://avarelaa.github.io/CockyLab/pexels-ejov-igor-1726422-12490467.jpg" alt="2,1">
+            <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,2">
+            <img src="https://avarelaa.github.io/CockyLab/pexels-photo-6621886.jpg" alt="1,2">
+            <img src="https://avarelaa.github.io/CockyLab/pexels-photo-5496590.jpg" alt="2,2">
+            <img src="https://avarelaa.github.io/CockyLab/pexels-photo-6621639.jpg" alt="3,2">
+            <img src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" alt="1,3">
+            <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="2,3">
+            <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="3,3">
+        </div>
+        <div class="image-grid-mobile" id="imageGrid">
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,1">
             <img src="https://avarelaa.github.io/CockyLab/pexels-ejov-igor-1726422-12490467.jpg" alt="2,1">
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,2">
@@ -140,6 +210,35 @@
             <div>your confidence</div>
         </div>
     </div>
+
+    <script>
+        // Check if the window width is less than or equal to 768px (Mobile view)
+        if (window.innerWidth <= 768) {
+            // Get the image grid element
+            const imageGrid = document.getElementById('imageGrid');
+            
+            // Set up the scroll speed and interval for slower scrolling
+            const scrollSpeed = 0.5; // Slower scroll speed (lower value = slower movement)
+            const scrollInterval = 800; // Slower interval (increase the time for smoother movement)
+
+            function autoScroll() {
+                imageGrid.scrollBy({
+                    left: scrollSpeed, // Scroll horizontally to the right
+                    behavior: 'smooth' // Smooth scroll
+                });
+
+                // Check if we've reached the end of the scroll
+                if (imageGrid.scrollLeft + imageGrid.clientWidth >= imageGrid.scrollWidth) {
+                    imageGrid.scrollLeft = 0; // Reset to start when reaching the end
+                }
+            }
+
+            // Start automatic scrolling with the adjusted speed
+            setInterval(autoScroll, scrollInterval);
+        }
+    </script>
 </body>
 </html>
+
+
 
