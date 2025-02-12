@@ -218,7 +218,7 @@
             const imageGrid = document.getElementById('imageGrid');
             
             // Set up the scroll speed and interval for slower scrolling
-            const scrollSpeed = 430; // Slower scroll speed (lower value = slower movement)
+            const scrollSpeed = 410; // Slower scroll speed (lower value = slower movement)
             const scrollInterval = 850; // Slower interval (increase the time for smoother movement)
 
             function autoScroll() {
@@ -229,7 +229,7 @@
 
                 // Check if we've reached the end of the scroll
                 if (imageGrid.scrollLeft + imageGrid.clientWidth >= imageGrid.scrollWidth) {
-                    imageGrid.scrollLeft = 10; // Reset to start when reaching the end
+                    imageGrid.scrollLeft = 0; // Reset to start when reaching the end
                 }
             }
 
