@@ -159,8 +159,8 @@
         // Check if the window width is less than or equal to 768px (Mobile view)
         if (window.innerWidth <= 768) {
             const imageGrid = document.getElementById('imageGridMobile');
-            const scrollSpeed = 300;
-            let lastTime = 30; // Track the last time requestAnimationFrame was called
+            const scrollSpeed = 1; // Slower scroll speed (lower value = slower movement)
+            const scrollInterval = 10; // Slower interval (increase the time for smoother movement)
 
             function autoScroll(time) {
                 // Calculate the time elapsed since the last frame
