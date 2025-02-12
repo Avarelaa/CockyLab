@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CockyLab</title>
     <style>
-         /* Resetting margin and padding */
-         * {
+        /* Resetting margin and padding */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         /* Body styling */
         body {
             display: flex;
@@ -21,24 +22,52 @@
             overflow: hidden;
             position: relative;
         }
-         /* Background overlay with blur effect */
-         .background-overlay {
+
+        /* Background overlay with blur effect */
+        .background-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: radial-gradient(circle, rgba(255, 233, 208, 0.4) 20%, rgba(51, 65, 72, 0.8) 80%);
-            z-index: 1;
+            z-index: 1; /* Asegura que quede debajo del texto */
         }
 
-         /* Container for content */
-         .container {
+        /* Container for content */
+        .container {
             position: relative;
             width: 100%;
             height: 100%;
             max-width: 1280px;
             margin: 0 auto;
+        }
+
+        /* Image grid styling for desktop */
+        .image-grid-desktop img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Image grid styling for mobile */
+        .image-grid-mobile {
+            display: flex; /* Use flex for horizontal scroll */
+            gap: 16px;
+            overflow-x: auto; /* Enable horizontal scroll */
+            scroll-snap-type: x mandatory; /* Enable snapping */
+            width: 100%;
+            height: 100%;
+        }
+
+        .image-grid-mobile img {
+            flex-shrink: 0; /* Prevent images from shrinking */
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 20px;
+            scroll-snap-align: start; /* Align images to the left when scrolling */
         }
 
         /* Text styling */
@@ -54,139 +83,108 @@
             color: #F1EDE1;
             letter-spacing: -4.48px;
             white-space: nowrap;
-        }
-@media (min-width: 768px) {
-       
-
-        /* Image grid styling */
-        .image-grid {
-            position: absolute;
-            top: 0;
-            left: 33.33%;
-            width: 66.67%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 383px;
-            gap: 48px;
-            opacity: 0.5;
+            z-index: 2; /* Asegura que el texto esté por encima del overlay */
         }
 
-        .image-grid img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 40px;
-            transition: transform 0.3s ease-in-out;
+        /* Mobile version with horizontal slider */
+        @media (max-width: 768px) {
+            .image-grid-desktop {
+                display: none; /* Hide desktop grid */
+            }
+
+            .image-grid-mobile {
+                display: flex; /* Show the mobile slider */
+                gap: 16px; /* Smaller gap for mobile */
+                overflow-x: auto; /* Enable horizontal scroll */
+                scroll-snap-type: x mandatory; /* Enable snapping */
+            }
+
+            .text {
+                font-size: min(14vw, 50px);
+                line-height: 0.6;
+                text-align: left;
+                left: 10%;
+                transform: translateY(-50%);
+            }
         }
 
-        /* Adjust positioning of images */
-        .image-grid img:nth-child(3n + 1) {
-            transform: translateY(-100px);
+        /* Desktop version with static grid */
+        @media (min-width: 769px) {
+            .image-grid-mobile {
+                display: none; /* Hide mobile slider */
+            }
+
+            .image-grid-desktop {
+                display: grid; /* Show desktop grid */
+                grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+                grid-auto-rows: 383px;
+                gap: 48px;
+            }
         }
-
-        .image-grid img:nth-child(3n + 3) {
-            transform: translateY(100px);
-        }
-
-        
-    }
-       
-
-
-
-    @media (max-width: 768px) {
-  /* Contenedor que recorta el carrusel */
-  .container {
-    overflow: hidden;
-  }
-
-  /* Cada copia de la galería: se define su ancho total y se posiciona */
-  .image-grid {
-    width: calc(6 * 100vw); /* 9 imágenes de 100vw cada una */
-    position: absolute;
-    top: 0;
-    left: 0; /* La primera copia inicia en 0 */
-    display: flex;
-    gap: 16px;
-    height: 100vh;
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
-
-  /* Cada imagen ocupa el ancho completo del viewport */
-  .image-grid img {
-    flex-shrink: 0;
-    width: 100vw;
-    height: auto;
-    object-fit: cover;
-    border-radius: 30px;
-  }
-
-  /* La copia duplicada se posiciona inmediatamente después de la primera */
-  .image-grid[aria-hidden] {
-    left: calc(6 * 100vw);
-  }
-
-  .text {
-    font-size: min(14vw, 50px);
-    line-height: 0.6;
-    text-align: left;
-    left: 10%;
-    transform: translateY(-50%);
-    position: relative;
-    z-index: 3;
-  }
-
-  /* Animación de desplazamiento: cada copia se mueve su ancho completo */
-  .group {
-    will-change: transform;
-    animation: scrolling 50s linear infinite;
-  }
-
-  @keyframes scrolling {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-}
-
-
-
     </style>
 </head>
 <body>
     <div class="background-overlay"></div>
     <div class="full-screen-white-background"></div>
     <div class="container">
-        <div class="image-grid group">
+        <div class="image-grid-desktop" id="imageGrid">
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,1">
             <img src="https://avarelaa.github.io/CockyLab/pexels-ejov-igor-1726422-12490467.jpg" alt="2,1">
-            
+            <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,2">
             <img src="https://avarelaa.github.io/CockyLab/pexels-photo-6621886.jpg" alt="1,2">
             <img src="https://avarelaa.github.io/CockyLab/pexels-photo-5496590.jpg" alt="2,2">
             <img src="https://avarelaa.github.io/CockyLab/pexels-photo-6621639.jpg" alt="3,2">
             <img src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" alt="1,3">
-           
+            <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="2,3">
+            <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="3,3">
         </div>
-        <div aria-hidden class="image-grid group">
+        <div class="image-grid-mobile" id="imageGridMobile">
             <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,1">
             <img src="https://avarelaa.github.io/CockyLab/pexels-ejov-igor-1726422-12490467.jpg" alt="2,1">
-           
+            <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="1,2">
             <img src="https://avarelaa.github.io/CockyLab/pexels-photo-6621886.jpg" alt="1,2">
             <img src="https://avarelaa.github.io/CockyLab/pexels-photo-5496590.jpg" alt="2,2">
             <img src="https://avarelaa.github.io/CockyLab/pexels-photo-6621639.jpg" alt="3,2">
             <img src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" alt="1,3">
-           
+            <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="2,3">
+            <img src="https://avarelaa.github.io/CockyLab/pexels-cottonbro-5928593.jpg" alt="3,3">
         </div>
-
         <div class="text">
             <div>boost</div>
             <div>your confidence</div>
         </div>
     </div>
+
+    <script>
+        // Check if the window width is less than or equal to 768px (Mobile view)
+        if (window.innerWidth <= 768) {
+            const imageGrid = document.getElementById('imageGridMobile');
+            const scrollSpeed = 0.5;
+            let lastTime = 0; // Track the last time requestAnimationFrame was called
+
+            function autoScroll(time) {
+                // Calculate the time elapsed since the last frame
+                const deltaTime = time - lastTime;
+                lastTime = time;
+
+                imageGrid.scrollBy({
+                    left: scrollSpeed * deltaTime, // Adjust speed based on elapsed time
+                    behavior: 'smooth'
+                });
+
+                // Check if we've reached the end of the scroll
+                if (imageGrid.scrollLeft + imageGrid.clientWidth >= imageGrid.scrollWidth) {
+                    imageGrid.scrollLeft = 0; // Reset to start when reaching the end
+                }
+
+                // Request the next animation frame
+                requestAnimationFrame(autoScroll);
+            }
+
+            // Start the auto-scroll animation
+            requestAnimationFrame(autoScroll);
+        }
+    </script>
 </body>
 </html>
+
