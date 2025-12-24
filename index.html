@@ -1,12 +1,567 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CockyLab - Boost your confidence</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="src/main.jsx"></script>
-  </body>
-</html>
+import React, { useState, useEffect } from 'react';
+import { Menu, X, ShoppingBag, ArrowRight, ShieldCheck, Heart, Zap, CheckCircle, Instagram, Mail } from 'lucide-react';
+
+// --- CONFIGURACIÓN DE MARCA Y DATOS ---
+
+const BRAND = {
+  name: "CockyLab",
+  claim: "Boost your confidence",
+  colors: {
+    green: "#00ab85",
+    coral: "#ed6a6d",
+    beige: "#f2ede2",
+    dark: "#283a42",
+    white: "#ffffff"
+  },
+  links: {
+    mercadolibre: "https://www.mercadolibre.com" // Placeholder para el link real
+  }
+};
+
+const PRODUCT = {
+  name: "Fibra+",
+  price: "$24.990",
+  description: "Suplemento diario para mantenerte ligero y listo.",
+  benefits: [
+    "Mejora tu digestión diaria",
+    "Siéntete ligero todo el día",
+    "Preparación simple, sin preocupaciones",
+    "100% natural y discreto"
+  ]
+};
+
+const BLOG_POSTS = [
+  {
+    id: 1,
+    title: "Rutinas de mañana para empezar con seguridad",
+    category: "Lifestyle",
+    image: "https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg",
+    excerpt: "Pequeños hábitos al despertar que cambian cómo enfrentas tu día y tu confianza."
+  },
+  {
+    id: 2,
+    title: "La conexión entre bienestar digestivo y confianza",
+    category: "Bienestar",
+    image: "https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg",
+    excerpt: "Por qué sentirse ligero físicamente impacta directamente en tu seguridad mental."
+  },
+  {
+    id: 3,
+    title: "Autocuidado masculino: Más allá de lo básico",
+    category: "Hábitos",
+    image: "https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg",
+    excerpt: "Rompiendo mitos sobre el cuidado personal. Verse bien es sentirse bien."
+  }
+];
+
+// --- COMPONENTES UI ---
+
+const ButtonPrimary = ({ children, onClick, className = "" }) => (
+  <button 
+    onClick={onClick}
+    className={bg-[#00ab85] hover:bg-[#008f6f] text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2 ${className}}
+  >
+    {children}
+  </button>
+);
+
+const ButtonSecondary = ({ children, onClick, className = "" }) => (
+  <button 
+    onClick={onClick}
+    className={border-2 border-[#00ab85] text-[#00ab85] hover:bg-[#00ab85] hover:text-white font-bold py-3 px-8 rounded-full transition-all flex items-center justify-center gap-2 ${className}}
+  >
+    {children}
+  </button>
+);
+
+const SectionTitle = ({ children, align = "center" }) => (
+  <h2 className={text-3xl md:text-4xl font-bold text-[#283a42] mb-6 text-${align} leading-tight}>
+    {children}
+  </h2>
+);
+
+// --- PÁGINAS ---
+
+const HomePage = ({ navigateTo }) => (
+  <div className="animate-fade-in">
+    {/* HERO SECTION */}
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" 
+          alt="Hombre confiado CockyLab" 
+          className="w-full h-full object-cover opacity-90"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#f2ede2]/95 via-[#f2ede2]/70 to-transparent md:via-[#f2ede2]/40"></div>
+      </div>
+      
+      <div className="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+        <div className="max-w-xl">
+          <span className="text-[#ed6a6d] font-bold tracking-wider uppercase mb-4 block animate-fade-in">Siempre listo</span>
+          <h1 className="text-5xl md:text-7xl font-extrabold text-[#283a42] mb-6 leading-tight">
+            {BRAND.claim}
+          </h1>
+          <p className="text-xl text-gray-700 mb-8 leading-relaxed font-medium">
+            Confianza, estilo y bienestar para hombres que quieren disfrutar sin preocupaciones.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <ButtonPrimary onClick={() => window.open(BRAND.links.mercadolibre, '_blank')}>
+              Comprar ahora <ArrowRight size={20} />
+            </ButtonPrimary>
+            <ButtonSecondary onClick={() => navigateTo('product')}>
+              Descubre cómo funciona
+            </ButtonSecondary>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* PROBLEMA / TENSIÓN */}
+    <section className="py-24 bg-[#283a42] text-[#f2ede2]">
+      <div className="container mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="order-2 md:order-1 relative">
+             <div className="absolute -inset-4 bg-[#ed6a6d]/20 rounded-2xl transform rotate-3"></div>
+             <img 
+              src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" 
+              alt="Pensativo en la cama" 
+              className="relative rounded-xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full object-cover h-[500px]"
+            />
+          </div>
+          <div className="order-1 md:order-2">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
+              ¿La preocupación corta el momento?
+            </h2>
+            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+              Sabemos que los procesos previos pueden ser tediosos. La incertidumbre incomoda y te saca del juego. 
+              No deberías tener que elegir entre espontaneidad y tranquilidad.
+            </p>
+            <div className="flex items-center gap-4 text-[#ed6a6d]">
+              <Zap size={32} />
+              <span className="font-bold text-xl">Recupera la espontaneidad</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* SOLUCIÓN & MARCA */}
+    <section className="py-20 bg-[#f2ede2]">
+      <div className="container mx-auto px-6 text-center max-w-3xl">
+        <SectionTitle>Esto es {BRAND.name}</SectionTitle>
+        <p className="text-xl text-gray-600 mb-12">
+          No somos una farmacéutica clínica. Somos una marca de estilo de vida diseñada para que te sientas seguro, ligero y preparado.
+          Bienestar simple para tu rutina diaria.
+        </p>
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            { icon: ShieldCheck, title: "Seguridad", text: "Siéntete en control de tu cuerpo." },
+            { icon: Zap, title: "Espontaneidad", text: "Listo cuando tú lo estés." },
+            { icon: Heart, title: "Disfrute", text: "Conéctate sin preocupaciones." }
+          ].map((item, index) => (
+            <div key={index} className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-[#00ab85]/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-[#00ab85]">
+                <item.icon size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-[#283a42] mb-2">{item.title}</h3>
+              <p className="text-gray-500">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* PRODUCTO TEASER */}
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-6">
+        <div className="bg-[#f2ede2] rounded-3xl p-8 md:p-16 flex flex-col md:flex-row items-center gap-12">
+          <div className="md:w-1/2 flex justify-center">
+             {/* Product Image from Uploads */}
+             <div className="relative w-full max-w-sm flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#00ab85]/5 rounded-full filter blur-3xl transform scale-75"></div>
+                <img 
+                  src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" 
+                  alt="Fibra+ Frasco" 
+                  className="relative z-10 w-full h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                />
+             </div>
+          </div>
+          <div className="md:w-1/2">
+            <span className="bg-[#ed6a6d] text-white px-3 py-1 rounded-full text-sm font-bold mb-4 inline-block">Producto Estrella</span>
+            <h2 className="text-4xl font-bold text-[#283a42] mb-6">Conoce {PRODUCT.name}</h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Mejora tu digestión, mantente ligero y prepárate para disfrutar. 
+              Un solo producto hoy, una marca que crece contigo.
+            </p>
+            <ul className="space-y-4 mb-8">
+              {PRODUCT.benefits.slice(0,3).map((benefit, i) => (
+                <li key={i} className="flex items-center gap-3 text-gray-700">
+                  <CheckCircle size={20} className="text-[#00ab85]" />
+                  {benefit}
+                </li>
+              ))}
+            </ul>
+            <ButtonPrimary onClick={() => window.open(BRAND.links.mercadolibre, '_blank')}>
+              Comprar en Mercado Libre
+            </ButtonPrimary>
+            <p className="mt-4 text-xs text-gray-400 flex items-center gap-1">
+              <ShieldCheck size={14} /> Compra 100% segura, envío discreto.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+);
+
+const ProductPage = () => (
+  <div className="pt-24 pb-20 bg-[#f2ede2] min-h-screen animate-fade-in">
+    <div className="container mx-auto px-6">
+      <div className="grid md:grid-cols-2 gap-12 bg-white rounded-3xl p-6 md:p-12 shadow-xl">
+        {/* Galería de imágenes simulada */}
+        <div className="space-y-4">
+          <div className="bg-[#f2ede2] rounded-2xl h-96 flex items-center justify-center relative overflow-hidden p-8">
+             <img 
+               src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" 
+               alt="Fibra+ Producto" 
+               className="w-full h-full object-contain drop-shadow-xl"
+             />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+             <img src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" className="rounded-xl h-32 object-cover w-full opacity-80 hover:opacity-100 transition-opacity" alt="Detalle" />
+             <img src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" className="rounded-xl h-32 object-cover w-full opacity-80 hover:opacity-100 transition-opacity" alt="Uso diario" />
+          </div>
+        </div>
+
+        {/* Info Producto */}
+        <div>
+          <h1 className="text-4xl md:text-5xl font-bold text-[#283a42] mb-2">{PRODUCT.name}</h1>
+          <p className="text-xl text-[#00ab85] font-bold mb-6">{PRODUCT.price}</p>
+          
+          <p className="text-gray-600 leading-relaxed mb-8">
+            {PRODUCT.description} Formulado para integrarse a tu rutina diaria sin complicaciones. 
+            Fibra+ te ayuda a mantener tu sistema digestivo regulado, permitiéndote sentirte seguro y preparado en cualquier momento.
+          </p>
+
+          <div className="bg-[#f9f9f9] p-6 rounded-xl mb-8">
+            <h3 className="font-bold text-[#283a42] mb-4">Por qué te va a gustar:</h3>
+            <ul className="space-y-3">
+              {PRODUCT.benefits.map((benefit, i) => (
+                <li key={i} className="flex items-start gap-3 text-gray-600">
+                  <CheckCircle size={20} className="text-[#00ab85] mt-1 shrink-0" />
+                  <span>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <ButtonPrimary className="w-full justify-center" onClick={() => window.open(BRAND.links.mercadolibre, '_blank')}>
+              Comprar ahora en Mercado Libre
+            </ButtonPrimary>
+            <p className="text-center text-sm text-gray-400">
+              Serás redirigido a Mercado Libre para un pago y envío seguros.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Sección Cómo se usa */}
+      <div className="mt-20">
+        <SectionTitle>Simple de usar</SectionTitle>
+        <div className="grid md:grid-cols-3 gap-8 mt-10">
+          {[
+            { title: "1. Toma", text: "3 cápsulas con abundante agua." },
+            { title: "2. Repite", text: "Dos veces al día, mañana y noche." },
+            { title: "3. Disfruta", text: "Siente la diferencia en tu confianza." }
+          ].map((step, i) => (
+            <div key={i} className="text-center">
+              <div className="text-6xl font-black text-[#ed6a6d] opacity-20 mb-4">{i + 1}</div>
+              <h3 className="text-xl font-bold text-[#283a42] mb-2">{step.title}</h3>
+              <p className="text-gray-600">{step.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const BlogPage = () => (
+  <div className="pt-24 pb-20 bg-[#f2ede2] min-h-screen animate-fade-in">
+    <div className="container mx-auto px-6">
+      <div className="text-center mb-16">
+        <span className="text-[#ed6a6d] font-bold tracking-wider uppercase">The Lab Journal</span>
+        <SectionTitle>Lifestyle & Bienestar</SectionTitle>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          Consejos, historias y rutinas para el hombre moderno que busca confianza y estilo.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-8">
+        {BLOG_POSTS.map((post) => (
+          <div key={post.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group cursor-pointer">
+            <div className="h-48 overflow-hidden">
+              <img 
+                src={post.image} 
+                alt={post.title} 
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+            <div className="p-6">
+              <span className="text-xs font-bold text-[#00ab85] bg-[#00ab85]/10 px-2 py-1 rounded mb-3 inline-block">
+                {post.category}
+              </span>
+              <h3 className="text-xl font-bold text-[#283a42] mb-3 leading-tight group-hover:text-[#00ab85] transition-colors">
+                {post.title}
+              </h3>
+              <p className="text-gray-500 text-sm mb-4">
+                {post.excerpt}
+              </p>
+              <span className="text-[#ed6a6d] font-bold text-sm flex items-center gap-1">
+                Leer más <ArrowRight size={16} />
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const AboutPage = () => (
+  <div className="pt-24 pb-20 bg-[#f2ede2] min-h-screen animate-fade-in">
+    <div className="container mx-auto px-6">
+      <div className="max-w-3xl mx-auto bg-white rounded-3xl p-8 md:p-16 shadow-lg">
+        <h1 className="text-4xl md:text-5xl font-bold text-[#283a42] mb-6 text-center">
+          About <span className="text-[#00ab85]">CockyLab</span>
+        </h1>
+        
+        <div className="prose prose-lg mx-auto text-gray-600">
+          <p className="lead text-xl text-center mb-8 font-medium">
+            Creemos que la confianza es el accesorio más importante que puedes llevar.
+          </p>
+          
+          <img 
+            src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" 
+            alt="Lifestyle CockyLab" 
+            className="w-full h-64 object-cover rounded-xl mb-8"
+          />
+
+          <h3 className="text-2xl font-bold text-[#283a42] mb-4">¿Por qué existimos?</h3>
+          <p className="mb-6">
+            Nacimos para eliminar el estigma y la incomodidad de la preparación. Entendemos que el hombre moderno quiere cuidarse, sentirse bien y disfrutar de su intimidad sin planificaciones complejas ni preocupaciones médicas.
+          </p>
+
+          <h3 className="text-2xl font-bold text-[#283a42] mb-4">Nuestra Visión</h3>
+          <p className="mb-6">
+            Comenzamos con <strong>Fibra+</strong> porque creemos que el bienestar empieza desde adentro. Pero CockyLab es más que un producto; es un laboratorio de confianza. Estamos desarrollando una línea completa de esenciales para potenciar tu seguridad diaria.
+          </p>
+
+          <blockquote className="border-l-4 border-[#ed6a6d] pl-4 italic text-gray-800 my-8">
+            "Boost your confidence. Be ready, feel confident."
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const ContactPage = () => (
+  <div className="pt-24 pb-20 bg-[#f2ede2] min-h-screen animate-fade-in">
+    <div className="container mx-auto px-6 max-w-xl">
+      <div className="text-center mb-10">
+        <SectionTitle>Hablemos</SectionTitle>
+        <p className="text-gray-600">
+          ¿Tienes dudas sobre el producto o tu pedido? Estamos aquí.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-2xl p-8 shadow-lg">
+        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+          <div>
+            <label className="block text-sm font-bold text-[#283a42] mb-2">Nombre</label>
+            <input type="text" className="w-full bg-[#f9f9f9] border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#00ab85]" placeholder="Tu nombre" />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-[#283a42] mb-2">Email</label>
+            <input type="email" className="w-full bg-[#f9f9f9] border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#00ab85]" placeholder="tu@email.com" />
+          </div>
+          <div>
+            <label className="block text-sm font-bold text-[#283a42] mb-2">Mensaje</label>
+            <textarea className="w-full bg-[#f9f9f9] border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#00ab85] h-32" placeholder="¿En qué podemos ayudarte?"></textarea>
+          </div>
+          <ButtonPrimary className="w-full">Enviar Mensaje</ButtonPrimary>
+        </form>
+
+        <div className="mt-8 pt-8 border-t border-gray-100 text-center">
+          <p className="text-gray-500 mb-2">También puedes escribirnos directo:</p>
+          <a href="mailto:hola@cockylab.com" className="text-[#00ab85] font-bold flex items-center justify-center gap-2 hover:underline">
+            <Mail size={18} /> hola@cockylab.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+// --- MAIN APP COMPONENT ---
+
+export default function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Scroll al top al cambiar de página
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setIsMenuOpen(false);
+  }, [currentPage]);
+
+  const renderPage = () => {
+    switch(currentPage) {
+      case 'home': return <HomePage navigateTo={setCurrentPage} />;
+      case 'product': return <ProductPage />;
+      case 'blog': return <BlogPage />;
+      case 'about': return <AboutPage />;
+      case 'contact': return <ContactPage />;
+      default: return <HomePage navigateTo={setCurrentPage} />;
+    }
+  };
+
+  const NavLink = ({ page, label }) => (
+    <button 
+      onClick={() => setCurrentPage(page)}
+      className={text-sm font-bold uppercase tracking-wider hover:text-[#00ab85] transition-colors ${currentPage === page ? 'text-[#00ab85]' : 'text-[#283a42]'}}
+    >
+      {label}
+    </button>
+  );
+
+  return (
+    <div className="font-sans bg-[#f2ede2] text-[#283a42] min-h-screen flex flex-col selection:bg-[#00ab85] selection:text-white">
+      
+      {/* ANNOUNCEMENT BANNER */}
+      <div className="bg-[#283a42] text-white text-xs font-bold py-2 text-center tracking-wider">
+        ENVÍOS SEGUROS Y DISCRETOS A TODO EL PAÍS 🇨🇱
+      </div>
+
+      {/* HEADER */}
+      <header className="fixed w-full top-8 z-50 bg-[#f2ede2]/90 backdrop-blur-md border-b border-[#00ab85]/10 shadow-sm">
+        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+          {/* Logo */}
+          <div 
+            className="text-2xl font-black text-[#00ab85] cursor-pointer flex items-center gap-2 tracking-tighter"
+            onClick={() => setCurrentPage('home')}
+          >
+            COCKYLAB.
+          </div>
+
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            <NavLink page="home" label="Home" />
+            <NavLink page="product" label="Fibra+" />
+            <NavLink page="blog" label="Blog" />
+            <NavLink page="about" label="Nosotros" />
+            <NavLink page="contact" label="Contacto" />
+            
+            <button 
+              onClick={() => window.open(BRAND.links.mercadolibre, '_blank')}
+              className="bg-[#283a42] text-white hover:bg-[#00ab85] px-5 py-2 rounded-full font-bold text-sm transition-colors flex items-center gap-2"
+            >
+              Comprar <ShoppingBag size={16} />
+            </button>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button className="md:hidden text-[#283a42]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+
+        {/* Mobile Nav Overlay */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white absolute top-20 left-0 w-full shadow-xl border-t border-gray-100 p-6 flex flex-col gap-6 animate-fade-in">
+            <NavLink page="home" label="Home" />
+            <NavLink page="product" label="Fibra+" />
+            <NavLink page="blog" label="Blog" />
+            <NavLink page="about" label="Nosotros" />
+            <NavLink page="contact" label="Contacto" />
+            <button 
+              onClick={() => window.open(BRAND.links.mercadolibre, '_blank')}
+              className="bg-[#00ab85] text-white w-full py-3 rounded-lg font-bold flex justify-center items-center gap-2"
+            >
+              Comprar en Mercado Libre
+            </button>
+          </div>
+        )}
+      </header>
+
+      {/* MAIN CONTENT RENDER */}
+      <main className="flex-grow pt-8">
+        {renderPage()}
+      </main>
+
+      {/* FOOTER */}
+      <footer className="bg-[#283a42] text-[#f2ede2] py-16">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
+            <div className="col-span-1 md:col-span-1">
+              <h3 className="text-2xl font-black text-[#00ab85] mb-4">COCKYLAB.</h3>
+              <p className="text-gray-400 text-sm">
+                Boost your confidence. Productos de estilo de vida para el hombre que siempre está listo.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-white mb-4 uppercase tracking-wider text-sm">Explora</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li><button onClick={() => setCurrentPage('product')} className="hover:text-[#00ab85]">Fibra+</button></li>
+                <li><button onClick={() => setCurrentPage('blog')} className="hover:text-[#00ab85]">Blog</button></li>
+                <li><button onClick={() => setCurrentPage('about')} className="hover:text-[#00ab85]">Sobre Nosotros</button></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-white mb-4 uppercase tracking-wider text-sm">Legal</h4>
+              <ul className="space-y-2 text-gray-400 text-sm">
+                <li><a href="#" className="hover:text-[#00ab85]">Términos y condiciones</a></li>
+                <li><a href="#" className="hover:text-[#00ab85]">Política de privacidad</a></li>
+                <li><a href="#" className="hover:text-[#00ab85]">Envíos y Devoluciones</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-white mb-4 uppercase tracking-wider text-sm">Social</h4>
+              <div className="flex gap-4">
+                <a href="#" className="w-10 h-10 bg-[#f2ede2]/10 rounded-full flex items-center justify-center hover:bg-[#00ab85] transition-colors">
+                  <Instagram size={20} />
+                </a>
+                <a href="#" className="w-10 h-10 bg-[#f2ede2]/10 rounded-full flex items-center justify-center hover:bg-[#00ab85] transition-colors">
+                  <Mail size={20} />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+            <p>&copy; {new Date().getFullYear()} CockyLab. Todos los derechos reservados.</p>
+            <div className="flex items-center gap-2">
+              <ShieldCheck size={14} className="text-[#00ab85]" />
+              <span>Compra segura procesada por Mercado Libre</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <style>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.5s ease-out forwards;
+        }
+      `}</style>
+    </div>
+  );
+}
