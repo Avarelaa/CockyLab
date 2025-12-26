@@ -10,14 +10,74 @@
 
   gtag('config', 'G-26LLNEV5G7');
 </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CockyLab</title>
-        
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CockyLab - Boost your confidence</title>
     
+    <!-- --- SEO BÁSICO --- -->
+    <title>CockyLab | Bienestar Masculino y Confianza - Fibra+ Chile</title>
+    <meta name="description" content="Descubre CockyLab y Fibra+. Suplementos de bienestar y estilo de vida diseñados para la confianza del hombre moderno. Envíos discretos y seguros a todo Chile.">
+    <meta name="keywords" content="bienestar masculino, fibra para hombres, suplementos chile, confianza, digestión, cockylab, fibra+, salud sexual, estilo de vida hombre">
+    <meta name="author" content="CockyLab">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.cockylab.cl/">
+
+    <!-- --- OPEN GRAPH (Para compartir en Facebook/WhatsApp/LinkedIn) --- -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.cockylab.cl/">
+    <meta property="og:title" content="CockyLab - Boost your confidence">
+    <meta property="og:description" content="Recupera tu espontaneidad con Fibra+. Bienestar simple para tu rutina diaria. Envíos a todo Chile.">
+    <meta property="og:image" content="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg">
+    <meta property="og:locale" content="es_CL">
+
+    <!-- --- TWITTER CARDS --- -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.cockylab.cl/">
+    <meta name="twitter:title" content="CockyLab | Boost your confidence">
+    <meta name="twitter:description" content="Suplementos de diseño para el hombre que siempre está listo. Conoce Fibra+.">
+    <meta name="twitter:image" content="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg">
+    
+    <!-- --- DATOS ESTRUCTURADOS (SCHEMA.ORG) PARA GOOGLE --- -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "CockyLab",
+      "url": "https://www.cockylab.cl",
+      "logo": "https://avarelaa.github.io/CockyLab/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "contacto@cockylab.cl",
+        "contactType": "customer service",
+        "areaServed": "CL"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Fibra+",
+      "image": [
+        "https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg"
+      ],
+      "description": "Suplemento diario de fibra 100% natural para mantenerte ligero, regular tu digestión y aumentar tu confianza.",
+      "brand": {
+        "@type": "Brand",
+        "name": "CockyLab"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.cockylab.cl/#product",
+        "priceCurrency": "CLP",
+        "price": "24990",
+        "priceValidUntil": "2025-12-31",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+    }
+    </script>
+
     <!-- 1. Cargar React y ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -35,6 +95,11 @@
         }
         .animate-fade-in {
             animation: fade-in 0.5s ease-out forwards;
+        }
+        /* Mejora de accesibilidad: Focus visible */
+        button:focus-visible, a:focus-visible {
+            outline: 2px solid #00ab85;
+            outline-offset: 2px;
         }
     </style>
 </head>
@@ -58,6 +123,7 @@
                 strokeLinecap="round" 
                 strokeLinejoin="round" 
                 className={className}
+                aria-hidden="true" /* Accesibilidad: Iconos decorativos */
             >
                 {children}
             </svg>
@@ -92,7 +158,7 @@
 
         const PRODUCT = {
             name: "Fibra+",
-            price: "$",
+            price: "$24.990",
             description: "Suplemento diario para mantenerte ligero y listo.",
             benefits: [
                 "Mejora tu digestión diaria",
@@ -148,6 +214,9 @@
 
         const trackPageView = (pageName) => {
             if (window.gtag) {
+                // Actualiza el título de la página visible para el navegador (bueno para historial y UX)
+                document.title = `CockyLab | ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}`;
+                
                 const title = pageName.charAt(0).toUpperCase() + pageName.slice(1);
                 window.gtag('event', 'page_view', {
                     page_title: title,
@@ -198,8 +267,9 @@
                     <div className="absolute inset-0 z-0">
                         <img 
                             src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" 
-                            alt="Hombre confiado CockyLab" 
+                            alt="Hombre confiado y relajado usando productos CockyLab" 
                             className="w-full h-full object-cover opacity-90"
+                            loading="eager" // Carga prioritaria para el LCP (Largest Contentful Paint)
                         />
                         <div className="absolute inset-0 bg-gradient-to-r from-[#f2ede2]/95 via-[#f2ede2]/70 to-transparent md:via-[#f2ede2]/40"></div>
                     </div>
@@ -236,8 +306,9 @@
                                 <div className="absolute -inset-4 bg-[#ed6a6d]/20 rounded-2xl transform rotate-3"></div>
                                 <img 
                                     src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" 
-                                    alt="Pensativo en la cama" 
+                                    alt="Hombre pensativo en la cama - Bienestar digestivo" 
                                     className="relative rounded-xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full object-cover h-[500px]"
+                                    loading="lazy"
                                 />
                             </div>
                             <div className="order-1 md:order-2">
@@ -292,8 +363,9 @@
                                     <div className="absolute inset-0 bg-[#00ab85]/5 rounded-full filter blur-3xl transform scale-75"></div>
                                     <img 
                                         src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" 
-                                        alt="Fibra+ Frasco" 
+                                        alt="Frasco de Fibra+ suplemento natural" 
                                         className="relative z-10 w-full h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                                        loading="lazy"
                                     />
                                 </div>
                             </div>
@@ -328,30 +400,40 @@
             </div>
         );
 
-        // Ajustamos el padding-top (pt-32) para compensar el header fijo
         const ProductPage = () => (
             <div className="pt-32 pb-20 bg-[#f2ede2] min-h-screen animate-fade-in">
                 <div className="container mx-auto px-6">
-                    <div className="grid md:grid-cols-2 gap-12 bg-white rounded-3xl p-6 md:p-12 shadow-xl">
+                    <div className="grid md:grid-cols-2 gap-12 bg-white rounded-3xl p-6 md:p-12 shadow-xl" itemScope itemType="https://schema.org/Product">
+                        {/* Meta tags ocultos para Schema dentro del componente */}
+                        <meta itemProp="name" content="Fibra+" />
+                        <meta itemProp="description" content="Suplemento diario de fibra para mejorar la digestión y el bienestar masculino." />
+                        <meta itemProp="sku" content="FIBRA-001" />
+                        
                         {/* Galería */}
                         <div className="space-y-4">
                             <div className="bg-[#f2ede2] rounded-2xl h-96 flex items-center justify-center relative overflow-hidden p-8">
                                 <img 
                                     src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" 
-                                    alt="Fibra+ Producto" 
+                                    alt="Fibra+ Producto - Frasco frontal" 
                                     className="w-full h-full object-contain drop-shadow-xl"
+                                    itemProp="image"
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <img src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" className="rounded-xl h-32 object-cover w-full opacity-80 hover:opacity-100 transition-opacity" alt="Detalle" />
-                                <img src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" className="rounded-xl h-32 object-cover w-full opacity-80 hover:opacity-100 transition-opacity" alt="Uso diario" />
+                                <img src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" className="rounded-xl h-32 object-cover w-full opacity-80 hover:opacity-100 transition-opacity" alt="Detalle cápsulas Fibra+" loading="lazy" />
+                                <img src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" className="rounded-xl h-32 object-cover w-full opacity-80 hover:opacity-100 transition-opacity" alt="Uso diario Fibra+" loading="lazy" />
                             </div>
                         </div>
 
                         {/* Info */}
                         <div>
                             <h1 className="text-4xl md:text-5xl font-bold text-[#283a42] mb-2">{PRODUCT.name}</h1>
-                            <p className="text-xl text-[#00ab85] font-bold mb-6">{PRODUCT.price}</p>
+                            <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
+                                <p className="text-xl text-[#00ab85] font-bold mb-6" itemProp="price" content="24990">
+                                    <span itemProp="priceCurrency" content="CLP">CLP</span> {PRODUCT.price}
+                                </p>
+                                <link itemProp="availability" href="https://schema.org/InStock" />
+                            </div>
                             
                             <p className="text-gray-600 leading-relaxed mb-8">
                                 {PRODUCT.description} Formulado para integrarse a tu rutina diaria sin complicaciones. 
@@ -418,12 +500,13 @@
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {BLOG_POSTS.map((post) => (
-                            <div key={post.id} onClick={() => trackEvent('view_blog_post', { post_id: post.id, title: post.title })} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group cursor-pointer">
+                            <article key={post.id} onClick={() => trackEvent('view_blog_post', { post_id: post.id, title: post.title })} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group cursor-pointer">
                                 <div className="h-48 overflow-hidden">
                                     <img 
                                         src={post.image} 
                                         alt={post.title} 
                                         className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                        loading="lazy"
                                     />
                                 </div>
                                 <div className="p-6">
@@ -440,7 +523,7 @@
                                         Leer más <ArrowRight size={16} />
                                     </span>
                                 </div>
-                            </div>
+                            </article>
                         ))}
                     </div>
                 </div>
@@ -462,8 +545,9 @@
                             
                             <img 
                                 src="https://avarelaa.github.io/CockyLab/pexels-photo-4833669.jpg" 
-                                alt="Lifestyle CockyLab" 
+                                alt="Estilo de vida CockyLab - Hombres seguros" 
                                 className="w-full h-64 object-cover rounded-xl mb-8"
+                                loading="lazy"
                             />
 
                             <h3 className="text-2xl font-bold text-[#283a42] mb-4">¿Por qué existimos?</h3>
@@ -502,23 +586,23 @@
                             alert('Gracias, mensaje enviado (Simulación)');
                         }}>
                             <div>
-                                <label className="block text-sm font-bold text-[#283a42] mb-2">Nombre</label>
-                                <input type="text" className="w-full bg-[#f9f9f9] border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#00ab85]" placeholder="Tu nombre" />
+                                <label className="block text-sm font-bold text-[#283a42] mb-2" htmlFor="name">Nombre</label>
+                                <input id="name" type="text" className="w-full bg-[#f9f9f9] border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#00ab85]" placeholder="Tu nombre" required />
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-[#283a42] mb-2">Email</label>
-                                <input type="email" className="w-full bg-[#f9f9f9] border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#00ab85]" placeholder="tu@email.com" />
+                                <label className="block text-sm font-bold text-[#283a42] mb-2" htmlFor="email">Email</label>
+                                <input id="email" type="email" className="w-full bg-[#f9f9f9] border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#00ab85]" placeholder="tu@email.com" required />
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-[#283a42] mb-2">Mensaje</label>
-                                <textarea className="w-full bg-[#f9f9f9] border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#00ab85] h-32" placeholder="¿En qué podemos ayudarte?"></textarea>
+                                <label className="block text-sm font-bold text-[#283a42] mb-2" htmlFor="message">Mensaje</label>
+                                <textarea id="message" className="w-full bg-[#f9f9f9] border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#00ab85] h-32" placeholder="¿En qué podemos ayudarte?" required></textarea>
                             </div>
                             <ButtonPrimary className="w-full">Enviar Mensaje</ButtonPrimary>
                         </form>
 
                         <div className="mt-8 pt-8 border-t border-gray-100 text-center">
                             <p className="text-gray-500 mb-2">También puedes escribirnos directo:</p>
-                            <a href="mailto:hola@cockylab.com" className="text-[#00ab85] font-bold flex items-center justify-center gap-2 hover:underline">
+                            <a href="mailto:contacto@cockylab.cl" className="text-[#00ab85] font-bold flex items-center justify-center gap-2 hover:underline">
                                 <Mail size={18} /> contacto@cockylab.cl
                             </a>
                         </div>
@@ -604,12 +688,13 @@
                                         window.open(BRAND.links.mercadolibre, '_blank');
                                     }}
                                     className="bg-[#283a42] text-white hover:bg-[#00ab85] px-5 py-2 rounded-full font-bold text-sm transition-colors flex items-center gap-2"
+                                    aria-label="Ir a comprar Fibra+ en Mercado Libre"
                                 >
                                     Comprar <ShoppingBag size={16} />
                                 </button>
                             </nav>
 
-                            <button className="md:hidden text-[#283a42]" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                            <button className="md:hidden text-[#283a42]" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Abrir menú de navegación">
                                 {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
                             </button>
                         </div>
@@ -671,10 +756,10 @@
                                 <div>
                                     <h4 className="font-bold text-white mb-4 uppercase tracking-wider text-sm">Social</h4>
                                     <div className="flex gap-4">
-                                        <a href="https://www.instagram.com/cocky.lab?igsh=ZHA0YmV3dTNranZu&utm_source=qr" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[#f2ede2]/10 rounded-full flex items-center justify-center hover:bg-[#00ab85] transition-colors">
+                                        <a href="https://www.instagram.com/cocky.lab?igsh=ZHA0YmV3dTNranZu&utm_source=qr" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[#f2ede2]/10 rounded-full flex items-center justify-center hover:bg-[#00ab85] transition-colors" aria-label="Síguenos en Instagram">
                                             <Instagram size={20} />
                                         </a>
-                                        <a href="mailto:contacto@cockylab.cl" className="w-10 h-10 bg-[#f2ede2]/10 rounded-full flex items-center justify-center hover:bg-[#00ab85] transition-colors">
+                                        <a href="mailto:contacto@cockylab.cl" className="w-10 h-10 bg-[#f2ede2]/10 rounded-full flex items-center justify-center hover:bg-[#00ab85] transition-colors" aria-label="Envíanos un correo">
                                             <Mail size={20} />
                                         </a>
                                     </div>
