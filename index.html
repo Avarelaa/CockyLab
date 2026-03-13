@@ -143,7 +143,7 @@
         // --- DATOS ---
         const BRAND = {
             name: "CockyLab",
-            claim: "Boost your confidence",
+            claim: "Menos preparación Más acción",
             colors: {
                 green: "#00ab85",
                 coral: "#ed6a6d",
@@ -157,7 +157,7 @@
         };
 
         const PRODUCT = {
-            name: "Fibra+",
+            name: "Fibra+ en cápsula",
             price: "$",
             description: "Suplemento diario para mantenerte ligero y listo.",
             benefits: [
@@ -281,7 +281,7 @@
                                 {BRAND.claim}
                             </h1>
                             <p className="text-xl text-gray-700 mb-8 leading-relaxed font-medium">
-                                Confianza, estilo y bienestar para hombres que quieren disfrutar sin preocupaciones.
+                                Para limpiarte más facil y sentirte tranquilo cuando se da.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <ButtonPrimary onClick={() => {
@@ -316,8 +316,8 @@
                                     ¿La preocupación corta el momento?
                                 </h2>
                                 <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                                    Sabemos que los procesos previos pueden ser tediosos. La incertidumbre incomoda y te saca del juego. 
-                                    No deberías tener que elegir entre espontaneidad y tranquilidad.
+                                    A veces el plan no se agenda. Simplemente se da.
+Una mirada, una invitación, una noche que se alarga. Y lo último que quieres es dudar de ti mismo.
                                 </p>
                                 <div className="flex items-center gap-4 text-[#ed6a6d]">
                                     <Zap size={32} />
@@ -333,14 +333,13 @@
                     <div className="container mx-auto px-6 text-center max-w-3xl">
                         <SectionTitle>Esto es {BRAND.name}</SectionTitle>
                         <p className="text-xl text-gray-600 mb-12">
-                            No somos una farmacéutica clínica. Somos una marca de estilo de vida diseñada para que te sientas seguro, ligero y preparado.
-                            Bienestar simple para tu rutina diaria.
+                            CockyLab nace de una idea simple: el buen sexo se vive con actitud. No se improvisa. Creamos productos pensados para que te sientas más seguro cuando el momento aparece.  Fibra+ es solo el comienzo.
                         </p>
                         <div className="grid md:grid-cols-3 gap-8">
                             {[
-                                { icon: ShieldCheck, title: "Seguridad", text: "Siéntete en control de tu cuerpo." },
-                                { icon: Zap, title: "Espontaneidad", text: "Listo cuando tú lo estés." },
-                                { icon: Heart, title: "Disfrute", text: "Conéctate sin preocupaciones." }
+                                { icon: ShieldCheck, title: "Seguridad", text: "Limpieza real + tranquilidad mental" },
+                                { icon: Zap, title: "Espontaneidad", text: "Que el momento dependa de ti." },
+                                { icon: Heart, title: "Disfrute", text: "Enfocarte en el momento, no en la duda" }
                             ].map((item, index) => (
                                 <div key={index} className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
                                     <div className="bg-[#00ab85]/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-[#00ab85]">
@@ -370,11 +369,10 @@
                                 </div>
                             </div>
                             <div className="md:w-1/2">
-                                <span className="bg-[#ed6a6d] text-white px-3 py-1 rounded-full text-sm font-bold mb-4 inline-block">Producto Estrella</span>
+                                <span className="bg-[#ed6a6d] text-white px-3 py-1 rounded-full text-sm font-bold mb-4 inline-block">Empieza aquí</span>
                                 <h2 className="text-4xl font-bold text-[#283a42] mb-6">Conoce {PRODUCT.name}</h2>
                                 <p className="text-lg text-gray-600 mb-8">
-                                    Mejora tu digestión, mantente ligero y prepárate para disfrutar. 
-                                    Un solo producto hoy, una marca que crece contigo.
+                                    Mejora tu disgestión y mantente ligero con una fórmula natural pensada especificamente para este tipo de encuentros. No es una fibra más: está diseñada para cuando el momento realmente importa.
                                 </p>
                                 <ul className="space-y-4 mb-8">
                                     {PRODUCT.benefits.slice(0,3).map((benefit, i) => (
@@ -388,10 +386,10 @@
                                     trackEvent('begin_checkout', { item: 'Fibra+', origin: 'home_teaser' });
                                     window.open(BRAND.links.mercadolibre, '_blank');
                                 }}>
-                                    Comprar en Mercado Libre
+                                    Comprar
                                 </ButtonPrimary>
                                 <p className="mt-4 text-xs text-gray-400 flex items-center gap-1">
-                                    <ShieldCheck size={14} /> Compra 100% segura, envío discreto.
+                                    <ShieldCheck size={14} /> Compra 100% segura.
                                 </p>
                             </div>
                         </div>
